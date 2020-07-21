@@ -1,0 +1,32 @@
+body {
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+.pageheader {
+    margin-top: 25px;
+}
+
+.tofadein {
+    display: none;
+}
+
+#contributions {
+    display: none;
+    margin-top: 20px;
+}
+#proposal {
+    display: none;
+    margin-top: 20px;
+}
+#about {
+    display: none;
+    margin-top: 20px;
+}
+#vote {
+    display: none;
+    margin-top: 20px;
+}
+
+.logo {
+    height: 0.85em;
+}
