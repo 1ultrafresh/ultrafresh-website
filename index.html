@@ -123,3 +123,65 @@ Now, The Ultrafresh delegate will focus all efforts on create a strong network o
 
 
 </ul>
+	Thank you for choosing to support Ultrafresh as a Lisk delegate!
+              </p><p>
+              <a class="btn-lg btn-info btn" href="lisk://main/voting/vote?votes=ultrafresh"
+                  >Vote for Ultrafresh</a
+</p>
+        </div>
+</div>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script>
+            var current_page = 'contributions';
+            var links_to_fade_in = [];
+            $('#navlinks > .tofadein').each(function(index) {
+                links_to_fade_in.push([$(this), index]);
+            });
+            for (var i = 0; i < links_to_fade_in.length; i++) {
+                (function(links_to_fade_in, i) {
+                    setTimeout(function() {
+                        links_to_fade_in[i][0].fadeIn(1000);
+                    }, links_to_fade_in[i][1] * 150);
+                })(links_to_fade_in, i);
+            }
+            setTimeout(function() {
+                $('#contributions').fadeIn();
+            }, 800);
+            $('.gotopage').click(function() {
+                var pgid = $(this).data('pageid');
+                $('[data-pageid="' + current_page + '"]').removeClass('btn-dark');
+                $('[data-pageid="' + current_page + '"]').addClass('btn-light');
+                $('[data-pageid="' + pgid + '"]').removeClass('btn-light');
+                $('[data-pageid="' + pgid + '"]').addClass('btn-dark');
+                $('#' + current_page).fadeOut(100, function() {
+                    $('#' + pgid).fadeIn();
+                });
+                current_page = pgid;
+            });
+        </script>
+        <script>
+            var payout_data;
+            $.get('payouts.json', function(data) {
+                payout_data = data;
+                console.log(payout_data);
+            });
+            function lookupaddr() {
+                var input = $('#address').val();
+                if (input.substr(-1) == 'L') {
+                    if (input in payout_data['Data']) {
+                        var payout_for_address = payout_data['Data'][input];
+                        console.log(payout_for_address);
+                        $('#earnedlsk').html(payout_for_address['overallPaid'].toFixed(2));
+                        // $('#pendinglsk').html(payout_for_address['overallOwed'].toFixed(2));
+                        $('#earnedmrcl').html((payout_for_address['overallPaid'] * 32).toFixed(2));
+                        $('#balanceresults').fadeIn();
+                    }
+                }
+            }
+            $(document).ready(function() {
+                $('#address').change(lookupaddr);
+                $('#address').keyup(lookupaddr);
+            });
+        </script>
+    </body>
+</html>
