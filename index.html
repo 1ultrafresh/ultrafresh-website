@@ -15,7 +15,6 @@
         <link rel="stylesheet" href="css/theme.css" />
         <link rel="stylesheet" href="css/index.css" />
     </head>
-
     <body>
         <div class="container">
             <div class="pageheader">
@@ -31,10 +30,9 @@
               <button data-pageid="contributions" class="gotopage btn btn-lg btn-dark tofadein mt-1">
                   Contributions
               </button>
-                <button data-pageid="services" class="gotopage btn btn-lg btn-light tofadein mt-1">
-                    Services
+                <button data-pageid="proposal" class="gotopage btn btn-lg btn-light tofadein mt-1">
+                    Proposal
                 </button>
-
                 <button data-pageid="about" class="gotopage btn btn-lg btn-light tofadein mt-1">
                     About Me
                 </button>
@@ -69,13 +67,12 @@
 <li>Member of the Lisk Community Squad</li> 
 <li>Represented Lisk at events including Collision, Node JS Vancouver, NA Bitcoin Conference, The Libritarian Convention, SXSW, and Bitcoin 2021 Miami.</li>
 <li>Helped get Lisk listed on OkCoin by speaking in person with Jason Lau, President of Business Development at SXSW.</li>
-
 </ul>
 </p>
 </div>
 </div>
 </div>
-            <div id="Services">
+            <div id="proposal">
                     <div class="col-md-9">
                         <p class="lead">
                         <p>
@@ -89,13 +86,13 @@
   3) <b>Promote.</b> Establish relationships with well connected communities, developers, and influencers.
   <ul>
 	</ul>
-  4) <b>Lisk Services</b> Some services build for the Lisk Blockchain
+  4) <b>Funding.</b> Distribution of Tokens
 <ul>
-  <li> href="https://service.ultrafresh.info/api/v2/network/status" target="_blank"
-   <ul>
-	</ul>
-  <li> href="https://service.ultrafresh.info/api/status" target="_blank"
-  
+  <li>50% Pool
+  <li>30% Delegate Management and Operation 
+  <li>10% Sidechain Development and Lisk Promotion
+  <li>10% Locked into selfvote
+   
  
 </ul>
                         </p>
@@ -125,73 +122,8 @@ Now, The Ultrafresh delegate will focus all efforts on create a strong network o
 <b>Ultrafresh Voting Pool</b>
   <ul>
   <li>50% Distributed to voters
-  <li>Once per month  
-  <li>Self-vote weight is excluded 
-   
- 
+  <li>Once per Month 
+  <li>Self-vote weight is excluded! 
+
+
 </ul>
-	Thank you for choosing to support Ultrafresh as a Lisk delegate!
-              </p><p>
-              <a class="btn-lg btn-info btn" href="lisk://main/voting/vote?votes=ultrafresh"
-                  >Vote for Ultrafresh</a
-</p>
-        </div>
-</div>
-        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-        <script>
-            var current_page = 'contributions';
-            var links_to_fade_in = [];
-            $('#navlinks > .tofadein').each(function(index) {
-                links_to_fade_in.push([$(this), index]);
-            });
-
-            for (var i = 0; i < links_to_fade_in.length; i++) {
-                (function(links_to_fade_in, i) {
-                    setTimeout(function() {
-                        links_to_fade_in[i][0].fadeIn(1000);
-                    }, links_to_fade_in[i][1] * 150);
-                })(links_to_fade_in, i);
-            }
-
-            setTimeout(function() {
-                $('#contributions').fadeIn();
-            }, 800);
-
-            $('.gotopage').click(function() {
-                var pgid = $(this).data('pageid');
-                $('[data-pageid="' + current_page + '"]').removeClass('btn-dark');
-                $('[data-pageid="' + current_page + '"]').addClass('btn-light');
-                $('[data-pageid="' + pgid + '"]').removeClass('btn-light');
-                $('[data-pageid="' + pgid + '"]').addClass('btn-dark');
-                $('#' + current_page).fadeOut(100, function() {
-                    $('#' + pgid).fadeIn();
-                });
-                current_page = pgid;
-            });
-        </script>
-        <script>
-            var payout_data;
-            $.get('payouts.json', function(data) {
-                payout_data = data;
-                console.log(payout_data);
-            });
-            function lookupaddr() {
-                var input = $('#address').val();
-                if (input.substr(-1) == 'L') {
-                    if (input in payout_data['Data']) {
-                        var payout_for_address = payout_data['Data'][input];
-                        console.log(payout_for_address);
-                        $('#earnedlsk').html(payout_for_address['overallPaid'].toFixed(2));
-                        // $('#pendinglsk').html(payout_for_address['overallOwed'].toFixed(2));
-                        $('#earnedmrcl').html((payout_for_address['overallPaid'] * 32).toFixed(2));
-                        $('#balanceresults').fadeIn();
-                    }
-                }
-            }
-            $(document).ready(function() {
-                $('#address').change(lookupaddr);
-                $('#address').keyup(lookupaddr);
-            });
-        </script>
-    </body>
-</html>
